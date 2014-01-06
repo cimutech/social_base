@@ -27,7 +27,7 @@ class SocialStream::Base::InstallGenerator < Rails::Generators::Base #:nodoc:
 
   def require_stylesheets
     inject_into_file 'app/assets/stylesheets/application.css',
-                     " *= require social_stream-base\n",
+                     " *= require social_base\n",
                      :before => ' *= require_tree .'
   end
 

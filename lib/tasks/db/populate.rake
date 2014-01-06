@@ -17,7 +17,7 @@ namespace :db do
     task :read_environment => :environment do
       require 'forgery'
 
-      @SS_BASE_PATH = Gem::Specification.find_by_name('social_stream-base').full_gem_path
+      @SS_BASE_PATH = Gem::Specification.find_by_name('social_base').full_gem_path
       @LOGOS_PATH = File.join(@SS_BASE_PATH, 'lib', 'logos')
       @LOGOS_TOTAL = (ENV["LOGOS_TOTAL"] || 12).to_i
       @USERS = (ENV["USERS"] || 9).to_i

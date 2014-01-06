@@ -36,12 +36,6 @@ require 'has_scope'
 #Tags
 require 'acts-as-taggable-on'
 require 'acts_as_taggable_on/social_stream'
-# HTML forms
-# require 'formtastic'
-#Background tasks
-require 'resque/server'
-# Modernizr.js library
-require 'modernizr-rails'
 # Sphinx search engine
 # require 'thinking-sphinx'
 # require 'thinking-sphinx/social_stream'
@@ -49,11 +43,9 @@ require 'modernizr-rails'
 require 'sass-rails'
 # Autolink text blocks
 require 'rails_autolink'
-# SocialCheesecake
-require 'social_cheesecake'
 # # I18n-js
 # require 'i18n-js'
-# require 'i18n-js/social_stream-base'
+# require 'i18n-js/social_base'
 # Strong parameters
 require 'strong_parameters'
 

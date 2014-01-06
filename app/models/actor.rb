@@ -500,7 +500,7 @@ class Actor < ActiveRecord::Base
   end
 
   def avatar!
-    avatar || avatars.build
+    avatar || build_avatar
   end
 
   # The 'like' qualifications emmited to this actor

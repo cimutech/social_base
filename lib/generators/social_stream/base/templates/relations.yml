@@ -5,7 +5,7 @@
 # these are the defaults to start up with
 #
 # Detailed information on permissions is available at:
-# http://rdoc.info/gems/social_stream-base/Permission
+# http://rdoc.info/gems/social_base/Permission
 #
 user:
   friend:

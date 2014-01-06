@@ -34,8 +34,6 @@ class Activity < ActiveRecord::Base
 
   has_ancestry
 
-  paginates_per 10
-
   belongs_to :activity_verb
 
   belongs_to :author,
@@ -74,7 +72,7 @@ class Activity < ActiveRecord::Base
   after_destroy :decrement_like_count, :delete_notifications
 
   validates_presence_of :author_id, :user_author_id, :owner_id, :relations
- 
+
   #For now, it should be the last one
   #FIXME
   after_create :send_notifications
@@ -208,7 +206,7 @@ class Activity < ActiveRecord::Base
                :receiver => view.link_name(receiver_subject)
       end
     when 'join'
-      I18n.t('notification.join.one', 
+      I18n.t('notification.join.one',
             :sender => view.link_name(sender_subject),
             :thing => I18n.t(direct_object.class.to_s.underscore+'.one'),
             :title => title_of(direct_object))
@@ -220,8 +218,8 @@ class Activity < ActiveRecord::Base
   # Title for activity streams
   def stream_title
     # FIXMEEEEEEEEEEEEEEEEE
-    object = ( direct_object.present? ? 
-               ( direct_object.is_a?(SocialStream::Models::Subject) ? 
+    object = ( direct_object.present? ?
+               ( direct_object.is_a?(SocialStream::Models::Subject) ?
                  direct_object.name :
                  direct_object.title ) :
                receiver.name )
@@ -235,7 +233,7 @@ class Activity < ActiveRecord::Base
   def stream_content
     stream_title
   end
-  
+
   def notificable?
     is_root? or ['post','update'].include?(root.verb)
   end
@@ -315,53 +313,53 @@ class Activity < ActiveRecord::Base
   def notification_subject
     sender_name= sender.name.truncate(30, :separator => ' ')
     receiver_name= receiver.name.truncate(30, :separator => ' ')
-    case verb 
+    case verb
       when 'like'
         if direct_object.acts_as_actor?
-          I18n.t('notification.fan', 
+          I18n.t('notification.fan',
                 :sender => sender_name,
                 :whose => I18n.t('notification.whose.'+ receiver.subject.class.to_s.underscore,
                             :receiver => receiver_name))
         else
-          I18n.t('notification.like.'+ receiver.subject.class.to_s.underscore, 
+          I18n.t('notification.like.'+ receiver.subject.class.to_s.underscore,
                 :sender => sender_name,
                 :whose => I18n.t('notification.whose.'+ receiver.subject.class.to_s.underscore,
                             :receiver => receiver_name),
                 :thing => I18n.t(direct_object.class.to_s.underscore+'.name'))
         end
       when 'follow'
-        I18n.t('notification.follow.'+ receiver.subject.class.to_s.underscore, 
+        I18n.t('notification.follow.'+ receiver.subject.class.to_s.underscore,
               :sender => sender_name,
               :who => I18n.t('notification.who.'+ receiver.subject.class.to_s.underscore,
                              :name => receiver_name))
       when 'make-friend'
-        I18n.t('notification.makefriend.'+ receiver.subject.class.to_s.underscore, 
+        I18n.t('notification.makefriend.'+ receiver.subject.class.to_s.underscore,
               :sender => sender_name,
               :who => I18n.t('notification.who.'+ receiver.subject.class.to_s.underscore,
                               :name => receiver_name))
       when 'post'
-        I18n.t('notification.post.'+ receiver.subject.class.to_s.underscore, 
+        I18n.t('notification.post.'+ receiver.subject.class.to_s.underscore,
             :sender => sender_name,
             :whose => I18n.t('notification.whose.'+ receiver.subject.class.to_s.underscore,
                               :receiver => receiver_name),
 	    :title => title_of(direct_object))
       when 'update'
-        I18n.t('notification.update.'+ receiver.subject.class.to_s.underscore, 
+        I18n.t('notification.update.'+ receiver.subject.class.to_s.underscore,
               :sender => sender_name,
               :whose => I18n.t('notification.whose.'+ receiver.subject.class.to_s.underscore,
                                :receiver => receiver_name),
               :thing => I18n.t(direct_object.class.to_s.underscore+'.one'))
       when 'join'
-        I18n.t('notification.join.one'  , 
+        I18n.t('notification.join.one'  ,
             :sender => sender_name,
             :thing => I18n.t(direct_object.class.to_s.underscore+'.title.one'),
             :title => title_of(direct_object))
-      
+
       else
         t('notification.default')
       end
   end
-  
+
   #Send notifications to actors based on proximity, interest and permissions
   def send_notifications
     notify
@@ -393,7 +391,7 @@ class Activity < ActiveRecord::Base
 
     direct_activity_object.decrement!(:like_count)
   end
-  
+
   # after_destroy callback
   #
   # Destroy any Notification linked with the activity

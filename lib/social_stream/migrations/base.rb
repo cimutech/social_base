@@ -4,7 +4,7 @@ module SocialStream
       def initialize
         require_old_migration 'acts-as-taggable-on', 'lib/generators/acts_as_taggable_on/migration/templates/active_record/migration'
         @mailboxer_migration = find_migration 'mailboxer'
-        @base_migration = find_migration 'social_stream-base'
+        @base_migration = find_migration 'social_base'
       end
 
       def up

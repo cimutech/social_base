@@ -7,7 +7,7 @@ module SocialStream
     # included in the application.
     #
     # = Scopes
-    # There are several scopes available for subjects 
+    # There are several scopes available for subjects
     #
     # alphabetic:: sort subjects by name
     # name_search:: simple search by name
@@ -21,14 +21,14 @@ module SocialStream
       included do
         subtype_of :actor,
                    :build => { :subject_type => to_s }
-        
+
         has_one :activity_object, :through => :actor
         has_one :profile, :through => :actor
-        
+
         validates_presence_of :name
-        
+
         accepts_nested_attributes_for :profile
-        
+
         scope :alphabetic, joins(:actor).merge(Actor.alphabetic)
 
         scope :letter, lambda{ |param|
@@ -38,7 +38,7 @@ module SocialStream
         scope :name_search, lambda{ |param|
           joins(:actor).merge(Actor.name_search(param))
         }
-        
+
         scope :tagged_with, lambda { |param|
           if param.present?
             joins(:actor => :activity_object).merge(ActivityObject.tagged_with(param))
@@ -47,12 +47,12 @@ module SocialStream
 
         scope :distinct_initials, joins(:actor).merge(Actor.distinct_initials)
 
-        scope :followed, lambda { 
+        scope :followed, lambda {
           joins(:actor).
             merge(Actor.followed)
         }
 
-        scope :liked, lambda { 
+        scope :liked, lambda {
           joins(:actor => :activity_object).
             order('activity_objects.like_count DESC')
         }
@@ -64,27 +64,17 @@ module SocialStream
             __send__ m
           end
         }
-  
-        define_index do
-          indexes actor.name, :sortable => true
-          indexes actor.email
-          indexes actor.slug
-                
-          has created_at
-          has Relation::Public.instance.id.to_s, :type => :integer, :as => :relation_ids
-          
-        end
       end
-      
+
       module ClassMethods
         def find_by_slug(perm)
           includes(:actor).where('actors.slug' => perm).first
         end
-        
+
         def find_by_slug!(perm)
           find_by_slug(perm) ||
             raise(ActiveRecord::RecordNotFound)
-        end 
+        end
       end
 
       def to_param
