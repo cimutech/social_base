@@ -44,6 +44,12 @@ module SocialStream
         end
       end
 
+      initializer "social_stream-base.avatars_for_rails" do
+        AvatarsForRails.setup do |config|
+          config.controller_avatarable = :current_actor
+        end
+      end
+
       initializer "social_base.mailboxer", :before => :load_config_initializers do
         Mailboxer.setup do |config|
           config.email_method = :mailboxer_email

@@ -1,4 +1,4 @@
-zh:
+zh-CN:
   language_name: "中文"
   actor:
     name: "姓名"
@@ -8,9 +8,9 @@ zh:
   account:
     cancel: "取消帐号"
     edit: "编辑帐号"
-    email: 
+    email:
       change: "更改邮箱地址"
-    lang: 
+    lang:
       change: "切换语言"
     one: "帐号"
     password:
@@ -94,7 +94,7 @@ zh:
           message: "%{姓名} 已加您作为联系人."
         Group:
           title: "%{subject} 已加 %{contact} 联络."
-          message: "%{name} 已加您作为联系人."           
+          message: "%{name} 已加您作为联系人."
       post:
         title:
           other_wall: "%{sender} → %{receiver}"
@@ -239,7 +239,7 @@ zh:
     other: "群组"
     all: "所有群组"
     all_n: "所有群组 (%{count})"
-    by: "被群组"    
+    by: "被群组"
     destroy:
       one: "删除群组"
       explanation: "所有和这个群组相关的活动的资料和联系会被删除!"
@@ -300,11 +300,11 @@ zh:
       subject: "主题"
     mark_as_read: "标记已读"
     message_mailer:
-      has_sent_new: 
+      has_sent_new:
         event: "己发送新讯息 %{receiver}"
         group: "己发送新讯息 %{receiver}"
         user: "己给您发送新讯息"
-      has_sent_reply: 
+      has_sent_reply:
         event: "已给您回复 %{receiver}"
         group: "已给您回复 %{receiver}"
         user: "已给您回复"
@@ -341,10 +341,10 @@ zh:
       group: "%{sender} 已加到 %{who} 作为联络."
       user: "%{sender} 已加到 %{who} 作为联络."
     hello: "您好 %{receiver},"
-    join: 
+    join:
       one: "%{sender}參加了%{thing}%{title}."
     like:
-      group: "%{sender} 喜欢 %{whose} %{thing}." 
+      group: "%{sender} 喜欢 %{whose} %{thing}."
       user: "%{sender} 喜欢 %{whose} %{thing}."
     look: "请看看这个 %{sender} 的最新发布"
     makefriend:
@@ -367,7 +367,7 @@ zh:
     who:
       group: "%{name}"
       user: "您"
-    whose: 
+    whose:
       group: "%{receiver} 的"
       user: "您的"
   post:
@@ -414,17 +414,17 @@ zh:
     tags:
       default: "社交, 视频,"
       other: "标记"
-    website: "网站" 
+    website: "网站"
     update:
       error: "请重组您的个人背景资料:"
-      success: "您的个人背景资料已更新"     
+      success: "您的个人背景资料已更新"
   public:
     other: "大家"
   permission:
     description:
       default:
         brief:
-          create: 
+          create:
             activity: "贴到您的最新发布"
           follow:
             nil: "关注他们的活动"
@@ -479,7 +479,7 @@ zh:
   search:
     all_results: "查找所有 %{subject} (%{count})"
     at_least: "写下最少两个字符"
-    global: 
+    global:
       name: "全球搜查"
       first_result:
         more: "展示首回 %{count} 结果."

@@ -29,16 +29,13 @@ class Actor < ActiveRecord::Base
 
   acts_as_messageable
 
+  acts_as_avatarable :default_url => "/assets/:attachment/:style/:subtype_class.png"
+
   acts_as_url :name, :url_attribute => :slug
 
   has_one :profile,
           dependent: :destroy,
           inverse_of: :actor
-
-  has_one  :avatar,
-           :validate => true,
-           :autosave => true,
-           :dependent => :destroy
 
   has_many :sent_contacts,
            :class_name  => 'Contact',

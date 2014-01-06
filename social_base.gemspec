@@ -31,8 +31,8 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency('inherited_resources', '~> 1.3.0')
   # Slug generation
   s.add_runtime_dependency('stringex', '~> 1.3.0')
-  # # Avatar attachments
-  # s.add_runtime_dependency('avatars_for_rails', '~> 0.2.8')
+  # Avatar attachments
+  s.add_runtime_dependency('avatars_for_rails', '~> 1.1.4')
   # jQuery
   s.add_runtime_dependency('jquery-rails', '>= 1.0.9')
   # Authorization
