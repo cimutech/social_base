@@ -29,13 +29,18 @@ class Actor < ActiveRecord::Base
 
   acts_as_messageable
 
-  acts_as_avatarable :default_url => "/assets/:attachment/:style/:subtype_class.png"
-
   acts_as_url :name, :url_attribute => :slug
 
   has_one :profile,
           dependent: :destroy,
           inverse_of: :actor
+
+  has_many :avatars,
+           :validate => true,
+           :autosave => true,
+           :dependent => :destroy
+  has_one  :avatar,
+           :conditions => { :active => true }
 
   has_many :sent_contacts,
            :class_name  => 'Contact',
@@ -497,7 +502,7 @@ class Actor < ActiveRecord::Base
   end
 
   def avatar!
-    avatar || build_avatar
+    avatar || avatars.build
   end
 
   # The 'like' qualifications emmited to this actor
