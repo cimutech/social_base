@@ -18,7 +18,7 @@ Gem::Specification.new do |s|
   # Deep Merge support for Hashes
   s.add_runtime_dependency('deep_merge')
   # Rails
-  s.add_runtime_dependency('rails', '~> 3.1.1')
+  s.add_runtime_dependency('rails', '~> 3.2.1')
   # Rails Engine Decorators
   s.add_runtime_dependency('rails_engine_decorators')
   # Activity and Relation hierarchies
@@ -32,7 +32,7 @@ Gem::Specification.new do |s|
   # Slug generation
   s.add_runtime_dependency('stringex', '~> 1.3.0')
   # Avatar attachments
-  s.add_runtime_dependency('avatars_for_rails', '~> 0.2.8')
+  # s.add_runtime_dependency('avatars_for_rails', '~> 0.2.8')
   # jQuery
   s.add_runtime_dependency('jquery-rails', '>= 1.0.9')
   # Authorization

@@ -95,17 +95,6 @@ class CreateSocialStream < ActiveRecord::Migration
 
     add_index "authentications", ["user_id"], :name => "index_authentications_on_user_id"
 
-    create_table "avatars", :force => true do |t|
-      t.integer  "actor_id"
-      t.string   "logo_file_name"
-      t.string   "logo_content_type"
-      t.integer  "logo_file_size"
-      t.datetime "logo_updated_at"
-      t.boolean  "active",            :default => true
-    end
-
-    add_index "avatars", ["actor_id"], :name => "index_avatars_on_actor_id"
-
     create_table "channels", :force => true do |t|
       t.integer  "author_id"
       t.integer  "owner_id"
@@ -259,8 +248,6 @@ class CreateSocialStream < ActiveRecord::Migration
     add_foreign_key "audiences", "relations", :name => "audiences_on_relation_id"
 
     add_foreign_key "authentications", "users", :name => "authentications_on_user_id"
-
-    add_foreign_key "avatars", "actors", :name => "avatars_on_actor_id"
 
     add_foreign_key "channels", "actors", :name => "index_channels_on_author_id", :column => "author_id"
     add_foreign_key "channels", "actors", :name => "index_channels_on_owner_id", :column => "owner_id"

@@ -35,12 +35,12 @@ class Actor < ActiveRecord::Base
           dependent: :destroy,
           inverse_of: :actor
 
-  has_many :avatars,
-           :validate => true,
-           :autosave => true,
-           :dependent => :destroy
-  has_one  :avatar,
-           :conditions => { :active => true }
+  # has_many :avatars,
+  #          :validate => true,
+  #          :autosave => true,
+  #          :dependent => :destroy
+  # has_one  :avatar,
+  #          :conditions => { :active => true }
 
   has_many :sent_contacts,
            :class_name  => 'Contact',
