@@ -40,6 +40,12 @@ describe Actor do
     sgs.size.should be(5)
   end
 
+  it "should have an avatar" do
+    u = Factory(:user)
+    avatar = u.avatar!
+    avatar.should_not be(nil)
+  end
+
   it "should be destroyed" do
     u = Factory(:user)
     a = u.actor
