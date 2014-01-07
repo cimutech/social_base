@@ -79,11 +79,10 @@ class CreateSocialStream < ActiveRecord::Migration
 
     create_table :avatars, :force => true do |t|
       t.string :logo
-      t.string :avatarable_type
-      t.integer :avatarable_id
+      t.integer :actor_id
       t.timestamps
     end
-    add_index  :avatars, [:avatarable_id, :avatarable_type]
+    add_index  :avatars, :actor_id
 
     create_table "audiences", :force => true do |t|
       t.integer "relation_id"

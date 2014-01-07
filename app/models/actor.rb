@@ -36,7 +36,6 @@ class Actor < ActiveRecord::Base
           inverse_of: :actor
 
   has_one  :avatar,
-           :as => :avatarable,
            :validate => true,
            :autosave => true,
            :dependent => :destroy

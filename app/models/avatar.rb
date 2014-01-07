@@ -1,6 +1,6 @@
 class Avatar < ActiveRecord::Base
-  attr_accessible :logo, :avatarable_id, :avatarable_type
+  attr_accessible :logo, :actor_id
 
   validates_presence_of :logo
-  belongs_to :avatarable, :polymorphic => true
+  belongs_to :actor_id
 end
