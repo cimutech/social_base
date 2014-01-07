@@ -77,6 +77,14 @@ class CreateSocialStream < ActiveRecord::Migration
     add_index "actors", ["email"], :name => "index_actors_on_email"
     add_index "actors", ["slug"], :name => "index_actors_on_slug", :unique => true
 
+    create_table :avatars, :force => true do |t|
+      t.string :logo
+      t.string :avatarable_type
+      t.integer :avatarable_id
+      t.timestamps
+    end
+    add_index  :avatars, [:avatarable_id, :avatarable_type]
+
     create_table "audiences", :force => true do |t|
       t.integer "relation_id"
       t.integer "activity_id"
