@@ -53,7 +53,7 @@ Gem::Specification.new do |s|
   # I18n-js
   s.add_runtime_dependency('i18n-js','~>2.1.2')
   # Strong Parameters
-  s.add_runtime_dependency('strong_parameters','~> 0.1.5')
+  s.add_runtime_dependency('strong_parameters','~> 0.2.0')
 
   # Development gem dependencies
   #
