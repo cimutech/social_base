@@ -311,8 +311,8 @@ class Activity < ActiveRecord::Base
   # Get the email subject for the activity's notification
   #
   def notification_subject
-    sender_name= sender.name.truncate(30, :separator => ' ')
-    receiver_name= receiver.name.truncate(30, :separator => ' ')
+    sender_name= sender.subject.name.truncate(30, :separator => ' ')
+    receiver_name= receiver.subject.name.truncate(30, :separator => ' ')
     case verb
       when 'like'
         if direct_object.acts_as_actor?

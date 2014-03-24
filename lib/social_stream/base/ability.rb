@@ -5,10 +5,10 @@ module SocialStream
 
       # Create a new ability for this user, who is currently representing subject
       def initialize(subject)
-        
+
         #Download alias action
         alias_action :download, :to => :read
-        
+
         # Activity Objects
         (SocialStream.objects - [ :actor, :comment ]).map{ |obj|
           obj.to_s.classify.constantize
@@ -56,7 +56,7 @@ module SocialStream
         can :read, Activity do |a|
           a.public? ||
             subject.present? &&
-            a.audience.include?(subject.actor) 
+            a.audience.include?(subject.actor)
         end
 
         # Users
@@ -80,13 +80,6 @@ module SocialStream
 
         can :destroy, Group do |g|
           g.represented_by?(subject)
-        end
-
-        can :read, Profile
-
-        # Profile
-        can :update, Profile do |p|
-          p.subject.represented_by?(subject)
         end
 
         # Privacy

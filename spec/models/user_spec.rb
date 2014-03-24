@@ -9,6 +9,18 @@ describe User do
     assert @user.should == User.find_by_slug(@user.slug)
   end
 
+  it "should generate slug" do
+    assert Factory(:user).slug.present?
+  end
+
+  it "should generate different slug" do
+    a = Factory(:user)
+    b = Factory(:user, :name => a.name)
+
+    a.name.should == b.name
+    a.slug.should_not == b.slug
+  end
+
   context "member of a group" do
     before do
       tie = Factory(:member, :contact => Factory(:group_contact, :receiver => @user.actor))

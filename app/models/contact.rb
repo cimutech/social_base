@@ -146,7 +146,7 @@ class Contact < ActiveRecord::Base
   # Is this {Contact} +new+ or +edit+ for {SocialStream::Models::Subject subject} ?
   #
   # action is +new+ when, despite of being created, it has not {Tie ties} or it has a {Tie} with a
-  # {Relation::Reject reject relation}. 
+  # {Relation::Reject reject relation}.
   #
   # The contact's action is +edit+ when it has any {Tie} with a {Relation::Custom custom relation} or
   # a {Relation::Public public relation}
@@ -190,11 +190,11 @@ class Contact < ActiveRecord::Base
   def send_message
     return if message.blank?
 
-    sender.send_message(receiver, message, I18n.t("activity.verb.#{ verb }.#{ receiver.subject_type }.message", :name => sender.name))
+    sender.send_message(receiver, message, I18n.t("activity.verb.#{ verb }.#{ receiver.subject_type }.message", :name => sender.subject.name))
   end
 
   def set_inverse
-    
+
     inverse = self.class.sent_by(receiver_id).received_by(sender_id).first
 
     return if inverse.blank?

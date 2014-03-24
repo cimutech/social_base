@@ -18,7 +18,7 @@ Gem::Specification.new do |s|
   # Deep Merge support for Hashes
   s.add_runtime_dependency('deep_merge')
   # Rails
-  s.add_runtime_dependency('rails', '~> 3.2.1')
+  s.add_runtime_dependency('rails', '~> 3.2.16')
   # Rails Engine Decorators
   s.add_runtime_dependency('rails_engine_decorators')
   # Activity and Relation hierarchies
@@ -26,22 +26,15 @@ Gem::Specification.new do |s|
   # SQL foreign keys
   s.add_runtime_dependency('foreigner', '~> 1.1.1')
   # Authentication
-  s.add_runtime_dependency('devise', '~> 2.1.2')
+  s.add_runtime_dependency('devise', '~> 2.2.3')
   # CRUD controllers
-  s.add_runtime_dependency('inherited_resources', '~> 1.3.0')
+  # s.add_runtime_dependency('inherited_resources', '>= 1.3.0')
   # Slug generation
-  s.add_runtime_dependency('stringex', '~> 1.3.0')
+  s.add_runtime_dependency('stringex', '>= 1.5.1')
   # Avatar attachments
   # s.add_runtime_dependency('avatars_for_rails', '~> 0.2.8')
-  # jQuery
-  s.add_runtime_dependency('jquery-rails', '>= 1.0.9')
-  # Authorization
-  s.add_runtime_dependency('cancan', '~> 1.6.7')
-  # # OAuth client
-  # s.add_runtime_dependency('omniauth-facebook','~> 1.4.1')
-  # s.add_runtime_dependency('omniauth-linkedin','~> 0.0.6')
   # Messages
-  s.add_runtime_dependency('mailboxer','~> 0.6.5')
+  s.add_runtime_dependency('mailboxer','>= 0.10.3')
   # Tagging
   s.add_runtime_dependency('acts-as-taggable-on','~> 2.2.2')
   # Sphinx search engine
@@ -49,11 +42,14 @@ Gem::Specification.new do |s|
   # Syntactically Awesome Stylesheets
   s.add_runtime_dependency('sass-rails', '>= 3.1.0')
   # Autolink text blocks
-  s.add_runtime_dependency('rails_autolink', '~> 1.0.4')
+  s.add_runtime_dependency('rails_autolink', '>= 1.0.4')
   # I18n-js
-  s.add_runtime_dependency('i18n-js','~>2.1.2')
+  # s.add_runtime_dependency('i18n-js','>= 2.1.2')
   # Strong Parameters
-  s.add_runtime_dependency('strong_parameters','~> 0.2.0')
+  s.add_runtime_dependency('strong_parameters','>= 0.2.0')
+
+  # cancan
+  s.add_runtime_dependency('cancancan', '~> 1.7')
 
   # Development gem dependencies
   #
@@ -75,4 +71,6 @@ Gem::Specification.new do |s|
   s.add_development_dependency('ci_reporter', '~> 1.6.4')
   # Scaffold generator
   s.add_development_dependency('nifty-generators','~> 0.4.5')
+  # pry
+  s.add_development_dependency('pry-rails','~> 0.3.2')
 end

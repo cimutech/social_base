@@ -35,15 +35,6 @@ module SocialStream
         SocialStream::ActivityStreams.register :note,   :post
       end
 
-      initializer "social_base.controller.helpers" do
-        ActiveSupport.on_load(:action_controller) do
-          include SocialStream::Controllers::Helpers
-          include SocialStream::Controllers::CancanDeviseIntegration
-          include SocialStream::Controllers::I18nIntegration
-          include SocialStream::Controllers::MarkNotificationsRead
-        end
-      end
-
       # initializer "social_stream-base.avatars_for_rails" do
       #   AvatarsForRails.setup do |config|
       #     config.avatarable_model = :actor
@@ -58,7 +49,7 @@ module SocialStream
 
       initializer "social_base.mailboxer", :before => :load_config_initializers do
         Mailboxer.setup do |config|
-          config.email_method = :mailboxer_email
+          config.email_method = :subject_mailboxer_email
         end
       end
 

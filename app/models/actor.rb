@@ -24,21 +24,9 @@ class Actor < ActiveRecord::Base
 
   include SocialStream::Models::Object
 
-  validates_presence_of :name, :message => ''
   validates_presence_of :subject_type
 
   acts_as_messageable
-
-  acts_as_url :name, :url_attribute => :slug
-
-  has_one :profile,
-          dependent: :destroy,
-          inverse_of: :actor
-
-  has_one  :avatar,
-           :validate => true,
-           :autosave => true,
-           :dependent => :destroy
 
   has_many :sent_contacts,
            :class_name  => 'Contact',
@@ -94,27 +82,13 @@ class Actor < ActiveRecord::Base
            :foreign_key => :owner_id,
            :dependent   => :destroy
 
-  scope :alphabetic, order('actors.name')
-
-  scope :letter, lambda { |param|
-    if param.present?
-      where('actors.name LIKE ?', "#{ param }%")
-    end
-  }
-
-  scope :name_search, lambda { |param|
-    if param.present?
-      where('actors.name LIKE ?', "%#{ param }%")
-    end
-  }
-
   scope :tagged_with, lambda { |param|
     if param.present?
       joins(:activity_object).merge(ActivityObject.tagged_with(param))
     end
   }
 
-  scope :distinct_initials, select('DISTINCT SUBSTR(actors.name,1,1) as initial').order("initial ASC")
+  # scope :distinct_initials, select('DISTINCT SUBSTR(actors.name,1,1) as initial').order("initial ASC")
 
   scope :contacted_to, lambda { |a|
     joins(:sent_contacts).merge(Contact.active.received_by(a))
@@ -135,7 +109,9 @@ class Actor < ActiveRecord::Base
 
   after_create :create_initial_relations
 
-  after_create :save_or_create_profile
+  def subject_name
+    subject.name
+  end
 
   # FIXME SocialStream::ActivityStreams::Supertype should take precedence over
   # SocialStream::ActivityStreams::Subtype
@@ -148,32 +124,8 @@ class Actor < ActiveRecord::Base
   #returned isntead.
   #
   #If no mail has to be sent, return nil.
-  def mailboxer_email(object)
-    #If actor has disabled the emails, return nil.
-    return nil if !notify_by_email
-    #If actor has enabled the emails and has email
-    return "#{name} <#{email}>" if email.present?
-    #If actor is a Group, has enabled emails but no mail we return the highest_rank ones.
-    if (group = self.subject).is_a? Group
-      emails = Array.new
-      group.relation_notifys.each do |relation|
-        receivers = group.contact_actors(:direction => :sent, :relations => relation)
-        receivers.each do |receiver|
-          next unless Actor.normalize(receiver).subject_type.eql?("User")
-
-          receiver_emails = receiver.mailboxer_email(object)
-          case receiver_emails
-          when String
-            emails << receiver_emails
-          when Array
-            receiver_emails.each do |receiver_email|
-              emails << receiver_email
-            end
-          end
-        end
-      end
-    return emails
-    end
+  def subject_mailboxer_email(object)
+    subject.mailboxer_email(object)
   end
 
   # The subject instance for this actor
@@ -484,7 +436,11 @@ class Actor < ActiveRecord::Base
       when :profile
         id
       else
-        raise "Unknown type of wall: #{ type }"
+        if options[:actor_ids].nil?
+          raise "Unknown type of wall without actor_ids: #{ type }"
+        else
+          options[:actor_ids]
+        end
       end
 
     wall = wall.authored_or_owned_by(actor_ids)
@@ -492,15 +448,7 @@ class Actor < ActiveRecord::Base
     # Authentication
     wall = wall.shared_with(options[:for])
 
-    wall = wall.order("created_at desc")
-  end
-
-  def logo
-    avatar!.logo
-  end
-
-  def avatar!
-    avatar || build_avatar
+    wall = wall.order("id desc")
   end
 
   # The 'like' qualifications emmited to this actor
@@ -551,18 +499,6 @@ class Actor < ActiveRecord::Base
   # After create callback
   def create_initial_relations
     Relation::Custom.defaults_for(self)
-  end
-
-  # After create callback
-  #
-  # Save the profile if it is present. Otherwise create it
-  def save_or_create_profile
-    if profile.present?
-      profile.actor_id = id
-      profile.save!
-    else
-      create_profile
-    end
   end
 
   # Calculate {#egocentric_ties}

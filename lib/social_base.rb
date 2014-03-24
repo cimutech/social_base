@@ -16,15 +16,6 @@ module SocialStream
   autoload :Relations, 'social_stream/relations'
   autoload :TestHelpers, 'social_stream/test_helpers'
 
-  module Controllers
-    autoload :MarkNotificationsRead,   'social_stream/controllers/mark_notifications_read'
-    autoload :I18nIntegration,         'social_stream/controllers/i18n_integration'
-    autoload :CancanDeviseIntegration, 'social_stream/controllers/cancan_devise_integration'
-    autoload :Helpers,  'social_stream/controllers/helpers'
-    autoload :Objects,  'social_stream/controllers/objects'
-    autoload :Subjects, 'social_stream/controllers/subjects'
-  end
-
   module Models
     autoload :Object,    'social_stream/models/object'
     autoload :Subject,   'social_stream/models/subject'
@@ -36,18 +27,6 @@ module SocialStream
     autoload :ActivityObject, 'social_stream/population/activity_object'
     autoload :PowerLaw,       'social_stream/population/power_law'
     autoload :Timestamps,     'social_stream/population/timestamps'
-  end
-
-  module Routing
-    module Constraints
-      autoload :Custom, 'social_stream/routing/constraints/custom'
-      autoload :Follow, 'social_stream/routing/constraints/follow'
-      autoload :Resque, 'social_stream/routing/constraints/resque'
-    end
-  end
-
-  module TestHelpers
-    autoload :Controllers, 'social_stream/test_helpers/controllers'
   end
 
 

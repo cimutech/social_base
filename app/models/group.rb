@@ -8,14 +8,8 @@ class Group < ActiveRecord::Base
 
   attr_accessor :_participants
 
-  delegate :description, :description=, :to => :profile!
-
   after_create :create_ties
 
-  def profile!
-    actor!.profile || actor!.build_profile
-  end
- 
   def recent_groups
     contact_subjects(:type => :group, :direction => :sent) do |q|
       q.select("contacts.created_at").
@@ -45,7 +39,7 @@ class Group < ActiveRecord::Base
     end
 =end
   end
-  
+
   # Creates the ties from the group to the participants
   def create_ties_to_participants
     participant_ids = ([ author_id, user_author_id ] | Array.wrap(@_participants)).uniq
@@ -54,7 +48,7 @@ class Group < ActiveRecord::Base
       c =
         sent_contacts.create! :receiver_id  => a,
                               :user_author  => user_author
-      
+
       c.relation_ids = Array.wrap(relation_customs.sort.first.id)
     end
   end

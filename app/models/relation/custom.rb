@@ -43,20 +43,20 @@ class Relation::Custom < Relation
                   :receiver_type => cfg_rel['receiver_type']
 
         if (ps = cfg_rel['permissions']).present?
-          ps.each do |p| 
+          ps.each do |p|
             p.push(nil) if p.size == 1
 
-            rels[name].permissions << 
+            rels[name].permissions <<
               Permission.find_or_create_by_action_and_object(*p)
-          end 
+          end
         end
       end
 
       # Parent, relations must be set after creation
       # FIXME: Can fix with ruby 1.9 and ordered hashes
-      cfg_rels.each_pair do |name, cfg_rel|
-        rels[name].update_attribute(:parent, rels[cfg_rel['parent']])
-      end
+      # cfg_rels.each_pair do |name, cfg_rel|
+      #   rels[name].update_attribute(:parent, rels[cfg_rel['parent']])
+      # end
 
       rels.values
     end
@@ -67,7 +67,7 @@ class Relation::Custom < Relation
     end
 
     private
-    
+
     # Gets the default relations defined in DEFAULT and updates the values
     # from the CONFIG_FILE configuration file
     def build_config
@@ -88,25 +88,25 @@ class Relation::Custom < Relation
     end
   end
 
-  # Other relations below in the same hierarchy that this relation
-  def weaker
-    descendants
-  end
+  # # Other relations below in the same hierarchy that this relation
+  # def weaker
+  #   descendants
+  # end
 
-  # Relations below or at the same level of this relation
-  def weaker_or_equal
-    subtree
-  end
+  # # Relations below or at the same level of this relation
+  # def weaker_or_equal
+  #   subtree
+  # end
 
-  # Other relations above in the same hierarchy that this relation
-  def stronger
-    ancestors
-  end
+  # # Other relations above in the same hierarchy that this relation
+  # def stronger
+  #   ancestors
+  # end
 
-  # Relations above or at the same level of this relation
-  def stronger_or_equal
-    path
-  end
+  # # Relations above or at the same level of this relation
+  # def stronger_or_equal
+  #   path
+  # end
 
   # JSON compatible with SocialCheesecake
   def to_cheesecake_hash(options = {})

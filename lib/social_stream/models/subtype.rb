@@ -45,7 +45,7 @@ module SocialStream #:nodoc:
 
         def supertype_foreign_key
           "#{ supertype_name }_id" # "actor_id"
-        end 
+        end
       end
 
       # Delegate missing methods to supertype, if they exist there
@@ -82,7 +82,7 @@ module SocialStream #:nodoc:
       # {SocialStream::Models::Supertype} handles some methods
       def respond_to? *args
         super || _delegate_to_supertype?(:method) && supertype!.respond_to?(*args)
-      end 
+      end
 
       def _delegate_to_supertype?(method)
         # These methods must not be delegated to avoid loops

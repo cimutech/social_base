@@ -7,7 +7,7 @@ require 'rails_engine_decorators'
 # Database foreign keys
 require 'foreigner'
 # jQuery
-require 'jquery-rails'
+# require 'jquery-rails'
 # Permalinks:
 require 'stringex'
 # Hierarchical relationships in Activity and Relation:
@@ -17,12 +17,12 @@ require 'mailboxer'
 # User authentication
 require 'devise'
 # Authorization
-require 'cancan'
+require 'cancancan'
 # REST controllers
-require 'inherited_resources'
-require 'inherited_resources/social_stream'
+# require 'inherited_resources'
+# require 'inherited_resources/social_stream'
 # Scopes in controllers
-require 'has_scope'
+# require 'has_scope'
 # Logo attachments
 # require 'paperclip'
 # require 'paperclip/social_stream'

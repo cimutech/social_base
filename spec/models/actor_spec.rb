@@ -1,17 +1,6 @@
 require 'spec_helper'
 
 describe Actor do
-  it "should generate slug" do
-    assert Factory(:user).actor.slug.present?
-  end
-
-  it "should generate different slug" do
-    a = Factory(:user).actor
-    b = Factory(:user, :name => a.name).actor
-
-    a.name.should == b.name
-    a.slug.should_not == b.slug
-  end
 
   it "should generate relations" do
     assert Factory(:user).relation_customs.present?
